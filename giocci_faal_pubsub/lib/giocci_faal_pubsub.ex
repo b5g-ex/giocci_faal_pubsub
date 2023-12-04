@@ -1,4 +1,5 @@
 defmodule GiocciFaalPubsub do
+  GenServer
   @moduledoc """
   Documentation for `GiocciFaalPubsub`.
   """
@@ -12,9 +13,6 @@ defmodule GiocciFaalPubsub do
       :world
 
   """
-  def hello do
-    :world
-  end
 
   def start_faal_pubsub do
     session = Zenohex.open
@@ -44,13 +42,19 @@ defmodule GiocciFaalPubsub do
   end
 
   defp callback(m,session) do
-    IO.puts(m)
-    return_publish(session)
-  end
-  defp callbackrt(m,session) do
-    IO.puts(m)
-    # return_publish(session)
+    msg = m |> Base.decode64! |> String.trim |> :erlang.binary_to_term
+    IO.inspect(msg)
   end
 
+  # defp callbackrt(m,session) do
+  #   IO.puts(m)
+  #   # return_publish(session)
+  # end
+
+
+  # defp callback(m,session) do
+  #   IO.puts(m)
+  #   return_publish(session)
+  # end
 
 end
