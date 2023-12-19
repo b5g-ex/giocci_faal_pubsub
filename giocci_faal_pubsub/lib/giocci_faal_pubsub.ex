@@ -42,7 +42,12 @@ defmodule GiocciFaalPubsub do
   end
 
   defp callback(m,session) do
-    msg = m |> Base.decode64! |> String.trim |> :erlang.binary_to_term
+    msg = m |> String.trim
+    IO.inspect(msg)
+    msg = msg|> String.trim
+            |> Base.decode64!
+            |> String.trim
+            |> :erlang.binary_to_term
     IO.inspect(msg)
   end
 
