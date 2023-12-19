@@ -43,8 +43,6 @@ defmodule GiocciFaalPubsub do
 
   defp callback(m,session) do
     msg = m |> String.trim
-    IO.inspect(msg)
-    msg = msg|> String.trim
             |> Base.decode64!
             |> String.trim
             |> :erlang.binary_to_term
